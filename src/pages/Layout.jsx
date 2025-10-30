@@ -1,15 +1,20 @@
-import { Outlet } from "react-router-dom/dist"
-import ScrollToTop from "../components/ScrollToTop"
-import { Navbar } from "../components/Navbar"
-import { Footer } from "../components/Footer"
+// src/pages/Layout.jsx
+import React from "react";
+import { Outlet, Link } from "react-router-dom";
+import DeleteModal from "../components/DeleteModal";
 
-// Base component that maintains the navbar and footer throughout the page and the scroll to top functionality.
-export const Layout = () => {
-    return (
-        <ScrollToTop>
-            <Navbar />
-                <Outlet />
-            <Footer />
-        </ScrollToTop>
-    )
-}
+export const Layout = () => (
+  <div className="container py-4">
+    <nav className="mb-4 d-flex justify-content-between align-items-center">
+      <h4 className="fw-bold"> Contact List</h4>
+      <div>
+        <Link to="/add" className="btn btn-primary">
+          Add Contact
+        </Link>
+      </div>
+    </nav>
+
+    <Outlet />
+    <DeleteModal />
+  </div>
+);

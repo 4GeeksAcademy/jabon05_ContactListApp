@@ -1,16 +1,20 @@
-import rigoImageUrl from "../assets/img/rigo-baby.jpg";
-import useGlobalReducer from "../hooks/useGlobalReducer.jsx";
+import React, { useContext } from "react";
+import { ContactContext } from "../context/ContactActions";
+import {ContactCard} from "../components/ContactCard";
+
 
 export const Home = () => {
+  const { contacts, loading } = useContext(ContactContext);
 
-  const {store, dispatch} =useGlobalReducer()
+  if (loading) return <p>Loading contacts...</p>;
+  if (!contacts.length)
+    return <p className="text-muted">No contacts yet. Add a new one!</p>;
 
-	return (
-		<div className="text-center mt-5">
-			<h1>Hello Rigo!!</h1>
-			<p>
-				<img src={rigoImageUrl} />
-			</p>
-		</div>
-	);
-}; 
+  return (
+    <div>
+      {contacts.map((c) => (
+        <ContactCard key={c.id} contact={c} />
+      ))}
+    </div>
+  );
+};
