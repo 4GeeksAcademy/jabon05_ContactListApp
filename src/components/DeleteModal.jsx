@@ -10,7 +10,7 @@ const DeleteModal = () => {
     setContactToDelete(null);
   };
 
-  return (
+ return (
     <div className="modal fade" id="confirmDeleteModal" tabIndex="-1" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true" >
       <div className="modal-dialog modal-dialog-centered">
         <div className="modal-content">

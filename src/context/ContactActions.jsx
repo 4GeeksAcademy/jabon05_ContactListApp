@@ -10,11 +10,35 @@ export const ContactProvider = ({ children }) => {
   const [loading, setLoading] = useState(false);
   const [contactToDelete, setContactToDelete] = useState(null);
 
+  {/*Create agenda if it does not exist*/}
+  const createNewAgenda = async () => {
+    try {
+      const response = await fetch(`${BASE_URL}/agendas/${AGENDA}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+      });
+      if (response.ok) {
+        console.log(`Agenda "${AGENDA}" creada correctamente.`);
+        await GetAllContacts();   {/*Fetch contacts after creation*/}
+      } else {
+        console.error("Error creando la agenda:", await response.text());
+      }
+    } catch (err) {
+      console.error("Error al crear la agenda:", err);
+    }
+  };
+
   {/*Fecth all contacts using GET*/}
   const GetAllContacts = async () => {
     setLoading(true);
     try {
       const response = await fetch(`${BASE_URL}/agendas/${AGENDA}/contacts`);
+      {/*Checking if the agenda is created*/}
+      if (response.status === 404) {
+        console.warn(`Agenda no encontrada, creando una nueva llamada ${AGENDA}` );
+        await createNewAgenda();
+        return;
+      }
       const data = await response.json();
       console.log("Fetched contacts:", data);
       if (Array.isArray(data.contacts)) {
