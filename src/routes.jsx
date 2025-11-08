@@ -15,7 +15,7 @@ export const router = createBrowserRouter(
         {/*Child routes */}
         <Route index element={<Home />} />
         <Route path="add" element={<AddEditContact />} />
-        <Route path="edit/:id" element={<AddEditContact />} />
+        <Route path="edit/:theId" element={<AddEditContact />} />
       </Route>
     )
 );

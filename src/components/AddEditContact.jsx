@@ -8,7 +8,7 @@ export const AddEditContact = () => {
   const { theId } = useParams();
   const existing = Array.isArray(contacts) ?  contacts.find((c) => c.id === parseInt(theId)) : null;
   const [form, setForm] = useState({
-    full_name: "",
+    name: "",
     email: "",
     phone: "",
     address: "",
@@ -35,8 +35,8 @@ export const AddEditContact = () => {
         <div className="mb-3">
           <label className="form-label">Full Name</label>
           <input
-            name="full_name"
-            value={form.full_name}
+            name="name"
+            value={form.name}
             onChange={ManageChange}
             className="form-control"
             required
